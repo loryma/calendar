@@ -1,0 +1,16 @@
+.calendarContainer {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.navigation {
+  padding: 0.5em 0;
+  background: linear-gradient(to bottom, #b1b1b1 0, #b1b1b11a 20%, transparent);
+}
+
+.calendar {
+  height: 0;
+  padding-top: 100%;
+  width: 100%;
+  position: relative;
+}

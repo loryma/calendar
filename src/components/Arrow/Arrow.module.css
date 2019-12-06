@@ -1,0 +1,6 @@
+.arrow {
+  padding: 0.2em;
+  cursor: pointer;
+  box-shadow: 1px 1px 3px #e4e4e4, -1px -1px 3px #e4e4e4;
+  line-height: 0.5em;
+}
