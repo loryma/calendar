@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import dateToText from "../../utilities/dateToText";
 import SearchItem from "../SearchItem/SearchItem";
 
 import classes from "./SearchResults.module.css";
@@ -18,7 +17,7 @@ const SearchResults = ({ active, query, results, onResultChoice }) => {
         event =>
           regEx.test(event.title) ||
           regEx.test(event.participants) ||
-          regEx.test(dateToText(event.date)) ||
+          regEx.test(event.date) ||
           regEx.test(event.description)
       )
     : [];
@@ -27,8 +26,8 @@ const SearchResults = ({ active, query, results, onResultChoice }) => {
     <SearchItem
       key={event.id}
       title={event.title}
-      date={dateToText(event.date)}
-      onResultChoice={onResultChoice.bind(this, event.date)}
+      date={event.date}
+      onResultChoice={onResultChoice.bind(this, event.dateMs)}
     />
   ));
   return (

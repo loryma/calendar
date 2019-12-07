@@ -23,7 +23,7 @@ const Calendar = ({ current, events }) => {
       const dayStr = String(
         +new Date(current.getFullYear(), current.getMonth(), i + 1)
       );
-      const event = events.find(event => event.date === dayStr);
+      const event = events.find(event => event.dateMs === dayStr);
       return {
         id: dayStr,
         day: i + 1,

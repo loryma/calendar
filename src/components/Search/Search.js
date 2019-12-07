@@ -15,11 +15,11 @@ const Search = ({ setCurrentDate }) => {
     setActive(true);
     setQuery(value);
   };
-  const onSearchChoice = date => {
-    if (date) {
+  const onSearchChoice = dateMs => {
+    if (dateMs) {
       setActive(false);
-      debugger;
-      setCurrentDate(new Date(+date));
+
+      setCurrentDate(new Date(+dateMs));
     }
   };
   return (

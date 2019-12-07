@@ -7,7 +7,6 @@ import validateDate from "../../utilities/validateDate";
 import Input from "../Input/Input";
 import classes from "./EventForm.module.css";
 import EventTextarea from "../EventTextarea/EventTextarea";
-import { validate } from "@babel/types";
 
 const EventForm = ({
   id,
@@ -17,7 +16,7 @@ const EventForm = ({
   active,
   onClose,
   title = "",
-  date = "",
+  date,
   participants = "",
   description = ""
 }) => {
@@ -37,7 +36,7 @@ const EventForm = ({
   useEffect(() => {
     setForm({
       title: { value: title, placeholder: "Event", error: null },
-      date: { value: dateToText(date), placeholder: "", error: null },
+      date: { value: date, placeholder: "", error: null },
       participants: {
         value: participants,
         placeholder: "Participants"
@@ -77,14 +76,16 @@ const EventForm = ({
         updateEvent({
           id,
           title: form.title.value,
-          date: textToDate(form.date.value),
+          date: form.date.value,
+          dateMs: textToDate(form.date.value),
           participants: form.participants.value,
           description: form.description.value
         });
       } else {
         createEvent({
           title: form.title.value,
-          date: textToDate(form.date.value),
+          date: form.date.value,
+          dateMs: textToDate(form.date.value),
           participants: form.participants.value,
           description: form.description.value
         });
@@ -161,7 +162,7 @@ const EventForm = ({
   );
 };
 
-const mapStateToProps = (state, { eventId, dateStr }) => {
+const mapStateToProps = (state, { eventId, dateMs }) => {
   let event;
 
   if (eventId) {
@@ -170,7 +171,7 @@ const mapStateToProps = (state, { eventId, dateStr }) => {
       return { ...event };
     }
   }
-  event = { date: dateStr };
+  event = { date: dateToText(dateMs), dateMs };
   return event;
 };
 

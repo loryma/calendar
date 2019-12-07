@@ -5,7 +5,8 @@ const initialState = [
   {
     id: uuid(),
     title: "My B",
-    date: `${[+new Date(2019, 11, 11)]}`,
+    date: `${new Date(2019, 11, 11)}`,
+    dateMs: `${+new Date(2019, 11, 11)}`,
     participants: "Me and You",
     description: "stuff"
   }
