@@ -1,0 +1,29 @@
+.searchItem {
+  padding: 0.3em 0.5em;
+  border-bottom: 1px solid #f4f4f4;
+}
+
+.searchItem:hover,
+.searchItem:focus {
+  background-color: #189fff;
+}
+
+.title {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.searchItem:hover .title,
+.searchItem:focus .title {
+  color: white;
+}
+
+.date {
+  font-size: 8px;
+  color: #84919b;
+}
+
+.searchItem:hover .date,
+.searchItem:focus .date {
+  color: white;
+}

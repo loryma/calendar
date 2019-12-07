@@ -1,9 +1,8 @@
 .day {
   width: 100%;
   height: 100%;
-  border: #efefef;
   padding: 0.2em;
-  border: 1px solid #ebebeb;
+  box-shadow: 1px 1px #ebebeb;
   position: relative;
 }
 

@@ -9,13 +9,8 @@ const Day = ({ id, date, weekDay, event }) => {
     setFormActive(false);
   };
 
-  const onFormOpen = () => {
+  const onFormOpen = e => {
     setFormActive(true);
-  };
-
-  const onBlur = () => {
-    setFormActive(false);
-    console.log("blur");
   };
 
   const eventContent = event && (
@@ -29,12 +24,7 @@ const Day = ({ id, date, weekDay, event }) => {
   const dayClasses = [classes.day, event ? classes.hasEvent : ""].join(" ");
 
   return (
-    <div
-      onBlur={onBlur}
-      onClick={onFormOpen}
-      className={dayClasses}
-      tabIndex="0"
-    >
+    <div onClick={onFormOpen} className={dayClasses} tabIndex="0" id={id}>
       <EventForm id={id} active={formActive} onClose={onFormClose} />
       <p className={classes.dayNumber}>
         {weekDay}

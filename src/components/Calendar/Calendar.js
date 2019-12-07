@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Month from "../Month/Month";
 
 import classes from "./Calendar.module.css";
-import CurrentMonth from "../CurrentMonth/CurrentMonth";
 
 const Calendar = ({ current, events }) => {
   const getDays = current => {

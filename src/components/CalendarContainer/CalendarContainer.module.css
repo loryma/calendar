@@ -4,8 +4,7 @@
 }
 
 .navigation {
-  padding: 0.5em 0;
-  background: linear-gradient(to bottom, #b1b1b1 0, #b1b1b11a 20%, transparent);
+  padding: 0.8em 0;
 }
 
 .calendar {
@@ -13,4 +12,24 @@
   padding-top: 100%;
   width: 100%;
   position: relative;
+}
+
+.header {
+  background-color: #f4f4f4;
+  padding-bottom: 0.5em;
+  width: 100%;
+  height: 5em;
+  box-shadow: 0 2px 4px #b1b1b1;
+}
+
+.headerContainer {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+@media (min-width) {
 }
