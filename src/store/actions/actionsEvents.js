@@ -1,8 +1,8 @@
 import * as actionTypes from "./actionTypes";
 
-export const updateEvent = (id, event) => ({
+export const createEvent = event => ({ type: actionTypes.CREATE_EVENT, event });
+export const updateEvent = event => ({
   type: actionTypes.UPDATE_EVENT,
-  id,
   event
 });
 

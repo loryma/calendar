@@ -25,7 +25,12 @@ const Day = ({ id, date, weekDay, event }) => {
 
   return (
     <div onClick={onFormOpen} className={dayClasses} tabIndex="0" id={id}>
-      <EventForm id={id} active={formActive} onClose={onFormClose} />
+      <EventForm
+        eventId={event && event.id}
+        dateStr={id}
+        active={formActive}
+        onClose={onFormClose}
+      />
       <p className={classes.dayNumber}>
         {weekDay}
         {date}

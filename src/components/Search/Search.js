@@ -6,7 +6,7 @@ import SearchResults from "../SearchResults/SearchResults";
 
 import classes from "./Search.module.css";
 
-const Search = ({ events, setCurrentDate }) => {
+const Search = ({ setCurrentDate }) => {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(true);
 
@@ -15,16 +15,11 @@ const Search = ({ events, setCurrentDate }) => {
     setActive(true);
     setQuery(value);
   };
-  const onSearchChoice = id => {
-    let date;
-
-    if (id) {
-      date = new Date(+id);
-    }
-
+  const onSearchChoice = date => {
     if (date) {
       setActive(false);
-      setCurrentDate(date);
+      debugger;
+      setCurrentDate(new Date(+date));
     }
   };
   return (
@@ -39,10 +34,8 @@ const Search = ({ events, setCurrentDate }) => {
   );
 };
 
-const mapStateToProps = state => ({ events: state.events });
-
 const mapDispatchToProps = dispatch => ({
   setCurrentDate: date => dispatch(actions.setCurrentDate(date))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(undefined, mapDispatchToProps)(Search);

@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
+import dateToText from "../../utilities/dateToText";
+import textToDate from "../../utilities/textToDate";
+import validateDate from "../../utilities/validateDate";
 import Input from "../Input/Input";
 import classes from "./EventForm.module.css";
 import EventTextarea from "../EventTextarea/EventTextarea";
+import { validate } from "@babel/types";
 
 const EventForm = ({
   id,
   updateEvent,
+  createEvent,
   deleteEvent,
   active,
   onClose,
@@ -17,8 +22,8 @@ const EventForm = ({
   description = ""
 }) => {
   const [form, setForm] = useState({
-    title: { value: title, placeholder: "Event" },
-    date: { value: date, placeholder: "" },
+    title: { value: title, placeholder: "Event", error: null },
+    date: { value: date, placeholder: "", error: null },
     participants: {
       value: participants,
       placeholder: "Participants"
@@ -31,8 +36,8 @@ const EventForm = ({
 
   useEffect(() => {
     setForm({
-      title: { value: title, placeholder: "Event" },
-      date: { value: date, placeholder: "" },
+      title: { value: title, placeholder: "Event", error: null },
+      date: { value: dateToText(date), placeholder: "", error: null },
       participants: {
         value: participants,
         placeholder: "Participants"
@@ -50,14 +55,40 @@ const EventForm = ({
 
   const onSubmit = e => {
     e.preventDefault();
-    // e.stopPropagation();
+    e.stopPropagation();
+    const fields = Object.entries(form);
+
+    for (let name in form) {
+      let error = validate(name, form[name].value);
+      setForm(state => ({ ...state, [name]: { ...state[name], error } }));
+    }
+
+    const hasErrors = fields.reduce(
+      (acc, [name, field]) => field.error || acc,
+      false
+    );
+
+    if (hasErrors) {
+      return;
+    }
+
     if (form.title.value.trim()) {
-      updateEvent(id, {
-        title: form.title.value,
-        date: form.date.value,
-        participants: form.participants.value,
-        description: form.description.value
-      });
+      if (id) {
+        updateEvent({
+          id,
+          title: form.title.value,
+          date: textToDate(form.date.value),
+          participants: form.participants.value,
+          description: form.description.value
+        });
+      } else {
+        createEvent({
+          title: form.title.value,
+          date: textToDate(form.date.value),
+          participants: form.participants.value,
+          description: form.description.value
+        });
+      }
       onClose();
     }
   };
@@ -68,12 +99,26 @@ const EventForm = ({
     onClose();
   };
 
+  const validate = (name, value) => {
+    let error = false;
+    if (name === "date") {
+      error = validateDate(value);
+    }
+    if (name === "title" && !value.trim()) {
+      error = "Event name is required";
+    }
+
+    return error;
+  };
+
   const onChange = (name, e) => {
     let value = e.target.value;
-    value = value.slice(0, 180);
+    value = value.slice(0, 120);
+    let error = validate(name, value);
 
-    setForm(state => ({ ...state, [name]: { ...state[name], value } }));
+    setForm(state => ({ ...state, [name]: { ...state[name], value, error } }));
   };
+
   const onFormClose = e => {
     e.stopPropagation();
     onClose();
@@ -84,6 +129,7 @@ const EventForm = ({
       <div className={classes.row} key={name}>
         {/* <div>{field.value}</div> */}
         <Input onChange={onChange.bind(this, name)} name={name} {...field} />
+        {field.error && <div className={classes.error}>{field.error}</div>}
       </div>
     ) : (
       <div className={classes.rowTextarea} key={name}>
@@ -115,10 +161,22 @@ const EventForm = ({
   );
 };
 
-const mapStateToProps = (state, { id }) =>
-  state.events[id] ? { ...state.events[id] } : {};
+const mapStateToProps = (state, { eventId, dateStr }) => {
+  let event;
+
+  if (eventId) {
+    event = state.events.find(event => event.id === eventId);
+    if (event) {
+      return { ...event };
+    }
+  }
+  event = { date: dateStr };
+  return event;
+};
+
 const mapDispatchToProps = dispatch => ({
-  updateEvent: (id, event) => dispatch(actions.updateEvent(id, event)),
+  createEvent: event => dispatch(actions.createEvent(event)),
+  updateEvent: event => dispatch(actions.updateEvent(event)),
   deleteEvent: id => dispatch(actions.deleteEvent(id))
 });
 

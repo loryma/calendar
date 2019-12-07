@@ -8,7 +8,7 @@
 
 .day:focus,
 .day:active {
-  outline: 1px solid #85c4f7;
+  box-shadow: 1px 1px #85c4f7 inset, 1px 1px #85c4f7 inset;
 }
 
 .hasEvent {

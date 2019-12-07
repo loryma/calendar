@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import dateToText from "../../utilities/dateToText";
 import SearchItem from "../SearchItem/SearchItem";
 
 import classes from "./SearchResults.module.css";
@@ -14,20 +15,20 @@ const SearchResults = ({ active, query, results, onResultChoice }) => {
 
   const filteredEvents = query
     ? results.filter(
-        ([id, event]) =>
+        event =>
           regEx.test(event.title) ||
           regEx.test(event.participants) ||
-          regEx.test(event.date) ||
+          regEx.test(dateToText(event.date)) ||
           regEx.test(event.description)
       )
     : [];
 
-  const resultContent = filteredEvents.map(([id, event]) => (
+  const resultContent = filteredEvents.map(event => (
     <SearchItem
-      key={id}
+      key={event.id}
       title={event.title}
-      date={event.date}
-      onResultChoice={onResultChoice.bind(this, id)}
+      date={dateToText(event.date)}
+      onResultChoice={onResultChoice.bind(this, event.date)}
     />
   ));
   return (
@@ -37,6 +38,6 @@ const SearchResults = ({ active, query, results, onResultChoice }) => {
   );
 };
 
-const mapStateToProps = state => ({ results: Object.entries(state.events) });
+const mapStateToProps = state => ({ results: state.events });
 
 export default connect(mapStateToProps)(SearchResults);
