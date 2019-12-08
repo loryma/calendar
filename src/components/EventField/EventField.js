@@ -18,14 +18,40 @@ const EventField = ({ saved, name, onChange, field }) => {
     setViewMode(state => !state);
   };
 
+  const textRowClasses = [classes.textRow, classes[name]].join(" ");
+
   const text = (
-    <div className={classes.textRow}>
-      <p classes={classes.text}>{field.value}</p>
-      <span onClick={toggleMode}>Edit</span>
+    <div className={textRowClasses}>
+      <p className={classes.text}>{field.value}</p>
+      <span className={classes.edit} onClick={toggleMode}>
+        Edit
+      </span>
     </div>
   );
 
-  return viewMode ? text : formField;
+  function getText() {
+    switch (name) {
+      case "title":
+        return text;
+      case "date":
+        return text;
+      case "participants":
+        return (
+          <>
+            <label className={classes.label}>Participants:</label>
+            {text}
+          </>
+        );
+      case "description":
+        return text;
+      default:
+        return text;
+    }
+  }
+
+  const textContent = getText();
+
+  return viewMode ? textContent : formField;
 };
 
 export default EventField;

@@ -5,7 +5,7 @@
 
 .searchItem:hover,
 .searchItem:focus {
-  background-color: #189fff;
+  background-color: var(--blue);
 }
 
 .title {

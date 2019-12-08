@@ -8,7 +8,8 @@
 
 .day:focus,
 .day:active {
-  box-shadow: 1px 1px #85c4f7 inset, 1px 1px #85c4f7 inset;
+  box-shadow: 1px 1px #85c4f7 inset, -1px -1px #85c4f7 inset;
+  outline: none;
 }
 
 .hasEvent {
@@ -25,6 +26,7 @@
   padding: 0.4em 0;
   line-height: 1.2em;
   color: #84919b;
+  overflow: hidden;
 }
 
 .eventTitle {
@@ -33,4 +35,5 @@
 .eventDescription {
   line-height: 1em;
   padding-top: 0.2em;
+  overflow: hidden;
 }

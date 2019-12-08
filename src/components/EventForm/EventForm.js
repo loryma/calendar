@@ -5,6 +5,7 @@ import dateToText from "../../utilities/dateToText";
 import textToDate from "../../utilities/textToDate";
 import validateDate from "../../utilities/validateDate";
 import EventField from "../EventField/EventField";
+import Button from "../Button/Button";
 import classes from "./EventForm.module.css";
 
 const EventForm = ({
@@ -142,12 +143,8 @@ const EventForm = ({
       {formContent}
 
       <div className={classes.buttonRow}>
-        <button className={classes.button} type="submit">
-          Save
-        </button>
-        <button onClick={onDelete} className={classes.button} type="button">
-          Delete
-        </button>
+        <Button type="submit">Save</Button>
+        <Button type="button">Delete</Button>
       </div>
     </form>
   );

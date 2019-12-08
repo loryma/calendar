@@ -1,6 +1,7 @@
 .calendarContainer {
   width: 90%;
   margin: 0 auto;
+  --blue: #189fff;
 }
 
 .navigation {
