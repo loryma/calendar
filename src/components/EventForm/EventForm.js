@@ -4,9 +4,8 @@ import * as actions from "../../store/actions";
 import dateToText from "../../utilities/dateToText";
 import textToDate from "../../utilities/textToDate";
 import validateDate from "../../utilities/validateDate";
-import Input from "../Input/Input";
+import EventField from "../EventField/EventField";
 import classes from "./EventForm.module.css";
-import EventTextarea from "../EventTextarea/EventTextarea";
 
 const EventForm = ({
   id,
@@ -125,23 +124,15 @@ const EventForm = ({
     onClose();
   };
 
-  const formContent = Object.entries(form).map(([name, field]) =>
-    name !== "description" ? (
-      <div className={classes.row} key={name}>
-        {/* <div>{field.value}</div> */}
-        <Input onChange={onChange.bind(this, name)} name={name} {...field} />
-        {field.error && <div className={classes.error}>{field.error}</div>}
-      </div>
-    ) : (
-      <div className={classes.rowTextarea} key={name}>
-        <EventTextarea
-          onChange={onChange.bind(this, name)}
-          name={name}
-          {...field}
-        />
-      </div>
-    )
-  );
+  const formContent = Object.entries(form).map(([name, field]) => (
+    <EventField
+      key={name}
+      onChange={onChange.bind(this, name)}
+      name={name}
+      field={field}
+      saved={!!id}
+    />
+  ));
 
   return (
     <form className={formClasses} onSubmit={onSubmit}>
