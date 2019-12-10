@@ -1,0 +1,19 @@
+.addForm {
+  position: absolute;
+  top: 2.7em;
+  left: 0;
+  background-color: white;
+  box-shadow: 3px 6px 5px #d9d9d9, -3px -2px 5px #d9d9d9;
+  background-color: white;
+  z-index: 2;
+  display: none;
+  width: 100%;
+  padding: 1.4em;
+  min-width: 140px;
+  width: 25%;
+  max-width: 300px;
+  width: 90vw;
+}
+.active {
+  display: block;
+}

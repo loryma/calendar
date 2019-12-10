@@ -26,22 +26,10 @@
   margin-top: auto;
 }
 
-.close {
-  color: #b1b1b1;
-  position: absolute;
-  top: 0.7rem;
-  right: 0.7rem;
-  font-size: 12px;
-  line-height: 0.8em;
-  cursor: pointer;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
 @media (min-width: 768px) {
   .eventForm {
     max-width: 300px;
-    min-height: 340px;
+    min-height: 330px;
     position: absolute;
     left: calc(100% + 15px);
     top: -1em;

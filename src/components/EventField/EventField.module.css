@@ -1,14 +1,14 @@
 .row {
   width: 100%;
-  min-height: 1.4em;
-  margin-bottom: 0.7em;
+  height: 1.7em;
+  margin-bottom: 0.2em;
   position: relative;
 }
 
 .rowTextarea {
   width: 100%;
-  height: 6em;
-  margin: 4em 0 1em 0;
+  height: 7.3em;
+  margin: 2em 0 0;
 }
 
 .textRow {
@@ -19,7 +19,7 @@
 }
 
 .descriptionRow {
-  margin-top: 4em;
+  margin-top: 2em;
 }
 .error {
   color: red;

@@ -1,0 +1,9 @@
+.addButton {
+  background-color: var(--deep-blue, #006fca);
+  height: 100%;
+  display: inline-block;
+  color: white;
+  font-size: 12px;
+  border: 1px solid var(--deep-blue, #006fca);
+  font-weight: bold;
+}

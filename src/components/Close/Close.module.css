@@ -1,0 +1,11 @@
+.close {
+  color: #b1b1b1;
+  font-size: 12px;
+  line-height: 0.8em;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+}

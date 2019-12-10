@@ -1,7 +1,12 @@
 import React from "react";
+import classes from "./AddButton.module.css";
 
-const AddButton = () => {
-  return <button type="button">Create event</button>;
+const AddButton = ({ onClick }) => {
+  return (
+    <button className={classes.addButton} type="button" onClick={onClick}>
+      Create event
+    </button>
+  );
 };
 
 export default AddButton;

@@ -6,6 +6,7 @@ import textToDate from "../../utilities/textToDate";
 import validateDate from "../../utilities/validateDate";
 import EventField from "../EventField/EventField";
 import Button from "../Button/Button";
+import Close from "../Close/Close";
 import classes from "./EventForm.module.css";
 
 const EventForm = ({
@@ -137,14 +138,15 @@ const EventForm = ({
 
   return (
     <form className={formClasses} onSubmit={onSubmit}>
-      <div className={classes.close} onClick={onFormClose}>
-        x
-      </div>
+      <Close onClick={onFormClose}>x</Close>
+
       {formContent}
 
       <div className={classes.buttonRow}>
         <Button type="submit">Save</Button>
-        <Button type="button">Delete</Button>
+        <Button type="button" onClick={onDelete}>
+          Delete
+        </Button>
       </div>
     </form>
   );

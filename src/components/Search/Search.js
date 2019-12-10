@@ -24,7 +24,11 @@ const Search = ({ setCurrentDate }) => {
   };
   return (
     <div className={classes.search}>
-      <Input value={query} onChange={onChange} />
+      <Input
+        value={query}
+        onChange={onChange}
+        placeholder="Event, date or participants"
+      />
       <SearchResults
         active={active}
         query={query}
