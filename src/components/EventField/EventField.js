@@ -6,7 +6,15 @@ import EventTextarea from "../EventTextarea/EventTextarea";
 const EventField = ({ saved, name, onChange, field }) => {
   const [viewMode, setViewMode] = useState(saved);
   const InputType = name !== "description" ? Input : EventTextarea;
-  const rowClass = name !== "description" ? classes.row : classes.rowTextarea;
+  const rowClass =
+    name !== "description"
+      ? [
+          classes.row,
+          field.error ? classes.rowWithError : "",
+          saved ? classes.rowEdited : ""
+        ].join(" ")
+      : classes.rowTextarea;
+
   const formField = (
     <div className={rowClass} key={name}>
       <InputType onChange={onChange} name={name} {...field} />

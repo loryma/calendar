@@ -40,18 +40,22 @@ function validateDate(text) {
   try {
     const day = +dayMatch[1];
 
-    if (!yearMatch) {
-      const guessDate = new Date(year, month, day);
-      const timeNow = new Date();
-      const dateNow = new Date(
-        timeNow.getFullYear(),
-        timeNow.getMonth(),
-        timeNow.getDate()
-      );
-      if (guessDate < dateNow) {
-        year += 1;
-      }
-    } else {
+    // if (!yearMatch) {
+    //   const guessDate = new Date(year, month, day);
+    //   const timeNow = new Date();
+    //   const dateNow = new Date(
+    //     timeNow.getFullYear(),
+    //     timeNow.getMonth(),
+    //     timeNow.getDate()
+    //   );
+    //   if (guessDate < dateNow) {
+    //     year += 1;
+    //   }
+    // } else {
+    //   year = yearMatch[1];
+    // }
+
+    if (yearMatch) {
       year = yearMatch[1];
     }
 

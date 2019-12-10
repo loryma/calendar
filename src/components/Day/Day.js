@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import EventForm from "../EventForm/EventForm";
 import classes from "./Day.module.css";
 
-const Day = ({ id, date, weekDay, event }) => {
+const Day = ({ id, date, weekDay, event, dayIndex }) => {
   const [formActive, setFormActive] = useState(false);
 
   const onFormClose = () => {
@@ -21,16 +21,23 @@ const Day = ({ id, date, weekDay, event }) => {
     </div>
   );
 
-  const dayClasses = [classes.day, event ? classes.hasEvent : ""].join(" ");
+  const dayClasses = [
+    classes.day,
+    event ? classes.hasEvent : "",
+    formActive ? classes.active : ""
+  ].join(" ");
 
   return (
     <div onClick={onFormOpen} className={dayClasses} tabIndex="0" id={id}>
-      <EventForm
-        eventId={event && event.id}
-        dateMs={id}
-        active={formActive}
-        onClose={onFormClose}
-      />
+      {formActive && (
+        <EventForm
+          eventId={event && event.id}
+          dateMs={id}
+          active={formActive}
+          onClose={onFormClose}
+          index={dayIndex}
+        />
+      )}
       <p className={classes.dayNumber}>
         {weekDay}
         {date}

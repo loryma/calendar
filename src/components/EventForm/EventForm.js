@@ -34,21 +34,6 @@ const EventForm = ({
     }
   });
 
-  useEffect(() => {
-    setForm({
-      title: { value: title, placeholder: "Event", error: null },
-      date: { value: date, placeholder: "", error: null },
-      participants: {
-        value: participants,
-        placeholder: "Participants"
-      },
-      description: {
-        value: description,
-        placeholder: "Description"
-      }
-    });
-  }, [title, date, participants, description]);
-
   const formClasses = [classes.eventForm, active ? classes.active : ""].join(
     " "
   );

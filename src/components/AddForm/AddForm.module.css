@@ -17,3 +17,8 @@
 .active {
   display: block;
 }
+
+.inputWrapper {
+  height: 1.7em;
+  margin-bottom: 0.5em;
+}

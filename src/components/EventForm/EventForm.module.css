@@ -8,10 +8,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  cursor: initial;
 }
 
 .eventForm:focus,
-.eventForm:acive {
+.eventForm:active {
   box-shadow: 3px 6px 5px #d9d9d9, -3px -2px 5px #d9d9d9;
 }
 

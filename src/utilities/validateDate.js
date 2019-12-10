@@ -25,6 +25,7 @@ function validateDate(text) {
   if (!monthMatch) {
     return "Invalid month name";
   }
+
   if (!dayMatch) {
     return "Invalid day";
   }
@@ -33,21 +34,31 @@ function validateDate(text) {
     return "Invalid year";
   }
 
-  const month = monthMatch[1];
-  const day = dayMatch[1];
-  const year = yearMatch[1];
+  const month = MONTHS.indexOf(monthMatch[1]);
 
-  const numberOfdays = new Date(year, month + 1, 0);
-
-  if (day > numberOfdays) {
-    return "Invalid number of days";
+  if (month === -1) {
+    return "Invalid month name";
   }
 
-  const dateObj = new Date(year, month, day);
+  try {
+    const day = dayMatch[1];
+    const year = yearMatch[1];
 
-  if (Object.prototype.toString.call(dateObj) !== "[object Date]") {
+    const numberOfdays = new Date(year, month + 1, 0);
+
+    if (day > numberOfdays) {
+      return "Invalid number of days";
+    }
+
+    const dateObj = new Date(year, month, day);
+
+    if (Object.prototype.toString.call(dateObj) !== "[object Date]") {
+      return "Invalid date";
+    }
+  } catch (errot) {
     return "Invalid date";
   }
+
   return false;
 }
 

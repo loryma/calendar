@@ -25,12 +25,22 @@ function textToDate(text) {
   const yearMatch = text.match(regXYear);
   let year = new Date().getFullYear();
 
-  if (!yearMatch) {
-    const guessDate = new Date(year, month, day);
-    if (guessDate < Date.now()) {
-      year += 1;
-    }
-  } else {
+  // if (!yearMatch) {
+  //   const guessDate = new Date(year, month, day);
+  //   const timeNow = new Date();
+  //   const dateNow = new Date(
+  //     timeNow.getFullYear(),
+  //     timeNow.getMonth(),
+  //     timeNow.getDate()
+  //   );
+  //   if (guessDate < dateNow) {
+  //     year += 1;
+  //   }
+  // } else {
+  //   year = yearMatch[1];
+  // }
+
+  if (yearMatch) {
     year = yearMatch[1];
   }
 

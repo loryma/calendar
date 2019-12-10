@@ -5,6 +5,7 @@ import * as actions from "../../store/actions";
 import validateShortDate from "../../utilities/validateShortDate";
 import textToShortDate from "../../utilities/textToShortDate";
 import dateToText from "../../utilities/dateToText";
+import textToTitle from "../../utilities/textToTitle";
 
 import Input from "../Input/Input";
 import Button from "../Button/Button";
@@ -32,13 +33,16 @@ const AddForm = ({ createEvent, active, close }) => {
       if (dateMs) {
         const dateObj = new Date(+dateMs);
         const date = dateToText(dateObj);
+        const title = textToTitle(value);
         createEvent({
-          title: value,
+          title,
           date,
           dateMs,
           participants: "",
           description: ""
         });
+        setValue("");
+        close();
       }
     }
   };
@@ -50,12 +54,15 @@ const AddForm = ({ createEvent, active, close }) => {
   return (
     <form className={addFormClasses} onSubmit={onSubmit}>
       <Close onClick={close}>x</Close>
-      <Input
-        value={value}
-        onChange={onChange}
-        placeholder="December 11, 20:00, birthday"
-        error={error}
-      />
+      <div className={classes.inputWrapper}>
+        <Input
+          value={value}
+          onChange={onChange}
+          placeholder="December 11, 20:00, birthday"
+          error={error}
+        />
+      </div>
+
       <Button type="submit">Create</Button>
     </form>
   );
