@@ -4,6 +4,12 @@
   position: relative;
 }
 
+.search:active :global(.searchList),
+.search:hover :global(.searchList),
+.search:focus :global(.searchList) {
+  display: block;
+}
+
 @media (min-width: 768px) {
   .search {
     width: 22%;

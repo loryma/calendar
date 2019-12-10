@@ -1,15 +1,42 @@
 .searchResults {
   display: none;
   position: absolute;
-  top: 2.7em;
+  top: 1.7em;
   left: 0;
   background-color: white;
   width: 100%;
   padding: 0.4em;
   box-shadow: 2px 2px 5px #d9d9d9, -2px -2px 5px #d9d9d9;
   z-index: 2;
+  max-height: 240px;
+  overflow-y: scroll;
 }
 
-.active {
-  display: block;
+.searchResults::-webkit-scrollbar {
+  width: 5px;
+}
+
+::scrollbar {
+  width: 8px;
+}
+
+.searchResults::-webkit-scrollbar-track {
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+::scrollbar-track {
+  border-radius: 15px;
+  background-color: #fff;
+}
+
+.searchResults::-webkit-scrollbar-thumb {
+  background: #b9b7b7;
+  border-radius: 10px;
+}
+
+::scrollbar-thumb {
+  background: #7a7a7a;
+  border-radius: 10px;
+  width: 5px;
 }

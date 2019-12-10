@@ -1,6 +1,10 @@
 .close {
   color: #b1b1b1;
   font-size: 12px;
+  width: 12px;
+  height: 12px;
+  transform: translate(50%, -50%);
+  text-align: center;
   line-height: 0.8em;
   cursor: pointer;
   -webkit-user-select: none;

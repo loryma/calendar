@@ -23,7 +23,7 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-start;
 }
 
 .descriptionRow {
@@ -39,12 +39,13 @@
 
 .text {
   color: black;
+  width: 90%;
 }
 
 .title .text {
   font-size: 1em;
   font-weight: bold;
-  line-height: 0.9em;
+  line-height: 1em;
   margin-bottom: 1em;
 }
 

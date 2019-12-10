@@ -1,9 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import EventForm from "../EventForm/EventForm";
+import Background from "../Background/Background";
 import classes from "./Day.module.css";
 
-const Day = ({ id, date, weekDay, event, dayIndex }) => {
-  const [formActive, setFormActive] = useState(false);
+const Day = ({ id, date, weekDay, event, dayIndex, onOpen, isActive }) => {
+  const [formActive, setFormActive] = useState(isActive);
+
+  useEffect(() => {
+    setFormActive(isActive);
+  }, [isActive]);
 
   const onFormClose = () => {
     setFormActive(false);
@@ -11,6 +16,7 @@ const Day = ({ id, date, weekDay, event, dayIndex }) => {
 
   const onFormOpen = e => {
     setFormActive(true);
+    onOpen(id);
   };
 
   const eventContent = event && (
@@ -28,15 +34,23 @@ const Day = ({ id, date, weekDay, event, dayIndex }) => {
   ].join(" ");
 
   return (
-    <div onClick={onFormOpen} className={dayClasses} tabIndex="0" id={id}>
+    <div
+      onClick={onFormOpen}
+      className={dayClasses}
+      tabIndex="0"
+      id={`event_${id}`}
+    >
       {formActive && (
-        <EventForm
-          eventId={event && event.id}
-          dateMs={id}
-          active={formActive}
-          onClose={onFormClose}
-          index={dayIndex}
-        />
+        <>
+          <Background onClose={onFormClose} />
+          <EventForm
+            eventId={event && event.id}
+            dateMs={id}
+            active={formActive}
+            onClose={onFormClose}
+            index={dayIndex}
+          />
+        </>
       )}
       <p className={classes.dayNumber}>
         {weekDay}

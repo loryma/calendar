@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Day from "../Day/Day";
 import classes from "./Month.module.css";
 
@@ -34,6 +34,10 @@ const weekDay = [
 ];
 
 const Month = ({ days }) => {
+  const [activeDayId, setActiveDayId] = useState(null);
+  const onOpen = id => {
+    setActiveDayId(id);
+  };
   const content = days.map((day, i) => (
     <Day
       id={day.id}
@@ -42,8 +46,11 @@ const Month = ({ days }) => {
       weekDay={weekDay[i] ? weekDay[i] : ""}
       dayIndex={i}
       event={day.event}
+      onOpen={onOpen}
+      isActive={day.id === activeDayId}
     />
   ));
+
   return <div className={classes.month}>{content}</div>;
 };
 

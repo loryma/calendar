@@ -45,7 +45,9 @@ const Navigation = ({ current, changeDate }) => {
   );
 };
 
-const mapStateToProps = state => ({ current: state.calendar.current });
+const mapStateToProps = state => ({
+  current: new Date(+state.calendar.current)
+});
 const mapDispatchToProps = dispatch => ({
   changeDate: date => dispatch(actions.setCurrentDate(date))
 });

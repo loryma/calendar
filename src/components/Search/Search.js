@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 import Input from "../Input/Input";
@@ -9,6 +9,15 @@ import classes from "./Search.module.css";
 const Search = ({ setCurrentDate }) => {
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(true);
+  const [focusedEvent, setFocusedEvent] = useState(null);
+
+  useEffect(() => {
+    if (focusedEvent) {
+      const el = document.querySelector(`#event_${focusedEvent}`);
+      el.click();
+      el.focus();
+    }
+  }, [focusedEvent]);
 
   const onChange = e => {
     const { value } = e.target;
@@ -17,9 +26,16 @@ const Search = ({ setCurrentDate }) => {
   };
   const onSearchChoice = dateMs => {
     if (dateMs) {
+      const eventDate = new Date(+dateMs);
+      const date = new Date(
+        eventDate.getFullYear(),
+        eventDate.getMonth(),
+        eventDate.getDate()
+      );
+      setCurrentDate(new Date(+date));
       setActive(false);
 
-      setCurrentDate(new Date(+dateMs));
+      setFocusedEvent(+eventDate);
     }
   };
   return (

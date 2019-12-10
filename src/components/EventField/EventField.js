@@ -4,7 +4,7 @@ import classes from "./EventField.module.css";
 import EventTextarea from "../EventTextarea/EventTextarea";
 
 const EventField = ({ saved, name, onChange, field }) => {
-  const [viewMode, setViewMode] = useState(saved);
+  const [viewMode, setViewMode] = useState(saved && field.value);
   const InputType = name !== "description" ? Input : EventTextarea;
   const rowClass =
     name !== "description"
@@ -59,7 +59,7 @@ const EventField = ({ saved, name, onChange, field }) => {
 
   const textContent = getText();
 
-  return viewMode ? textContent : formField;
+  return viewMode && field.value ? textContent : formField;
 };
 
 export default EventField;

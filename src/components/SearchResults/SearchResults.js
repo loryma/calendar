@@ -9,7 +9,8 @@ const SearchResults = ({ active, query, results, onResultChoice }) => {
 
   const searchResultsClasses = [
     classes.searchResults,
-    active ? classes.active : ""
+    // active ? classes.active : ""
+    "searchList"
   ].join(" ");
 
   const filteredEvents = query

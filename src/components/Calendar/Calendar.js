@@ -71,7 +71,7 @@ const Calendar = ({ current, events }) => {
 };
 
 const mapStateToProps = state => ({
-  current: state.calendar.current,
+  current: new Date(+state.calendar.current),
   events: state.events
 });
 

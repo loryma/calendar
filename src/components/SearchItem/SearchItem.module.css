@@ -1,6 +1,7 @@
 .searchItem {
   padding: 0.3em 0.5em;
   border-bottom: 1px solid #f4f4f4;
+  position: relative;
 }
 
 .searchItem:hover,
@@ -11,6 +12,8 @@
 .title {
   font-size: 12px;
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .searchItem:hover .title,
@@ -26,4 +29,25 @@
 .searchItem:hover .date,
 .searchItem:focus .date {
   color: white;
+}
+
+.searchItem:before {
+  pointer-events: none;
+  display: block;
+  width: 30px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  content: "";
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0.4)
+  );
+}
+
+.searchItem:hover::before,
+.searchItem:focus::before {
+  display: none;
 }

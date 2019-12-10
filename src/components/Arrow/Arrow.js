@@ -1,12 +1,9 @@
 import React from "react";
+import Button from "../Button/Button";
 import classes from "./Arrow.module.css";
 
 const Arrow = ({ onClick, children }) => {
-  return (
-    <div onClick={onClick} className={classes.arrow}>
-      {children}
-    </div>
-  );
+  return <Button onClick={onClick}>{children}</Button>;
 };
 
 export default Arrow;
