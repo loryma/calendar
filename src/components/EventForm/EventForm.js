@@ -135,7 +135,10 @@ const EventForm = ({
       {formContent}
 
       <div className={classes.buttonRow}>
-        <Button type="submit">Save</Button>
+        <div className={classes.buttonWrapper}>
+          <Button type="submit">Save</Button>
+        </div>
+
         <Button type="button" onClick={onDelete}>
           Delete
         </Button>

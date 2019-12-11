@@ -27,6 +27,11 @@
   margin-top: auto;
 }
 
+.buttonWrapper {
+  height: 100%;
+  margin-right: 1em;
+}
+
 :global .eventFormTriangle {
   display: none;
 }
