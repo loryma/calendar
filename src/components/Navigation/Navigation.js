@@ -38,9 +38,9 @@ const Navigation = ({ current, changeDate }) => {
   };
   return (
     <div className={classes.navigation}>
-      <Arrow onClick={onDateChange.bind(this, "prev")}>&#9666;</Arrow>
+      <Arrow onClick={onDateChange.bind(this, "prev")}>&#9664;</Arrow>
       <CurrentMonth current={currentFormatted} />
-      <Arrow onClick={onDateChange.bind(this, "next")}>&#9656;</Arrow>
+      <Arrow onClick={onDateChange.bind(this, "next")}>&#9654;</Arrow>
     </div>
   );
 };

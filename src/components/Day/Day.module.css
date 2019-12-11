@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.day:nth-child(7n + 1) {
+  box-shadow: 1px 1px #ebebeb, -1px 0 #ebebeb;
+}
+
 .day:focus,
 .day:active {
   box-shadow: 2px 2px var(--focus-ring-color, #85c4f7) inset,

@@ -12,6 +12,7 @@ import classes from "./EventForm.module.css";
 
 const EventForm = ({
   id,
+  index,
   updateEvent,
   createEvent,
   deleteEvent,
@@ -35,9 +36,13 @@ const EventForm = ({
     }
   });
 
-  const formClasses = [classes.eventForm, active ? classes.active : ""].join(
-    " "
-  );
+  const SatSun = index % 7 === 5 || index === 5 || (index + 1) % 7 === 0;
+
+  const formClasses = [
+    classes.eventForm,
+    active ? classes.active : "",
+    SatSun ? classes.left : ""
+  ].join(" ");
 
   const onSubmit = e => {
     e.preventDefault();
