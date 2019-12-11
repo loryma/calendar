@@ -6,6 +6,7 @@ import textToDate from "../../utilities/textToDate";
 import validateDate from "../../utilities/validateDate";
 import EventField from "../EventField/EventField";
 import Button from "../Button/Button";
+import PopupTriangle from "../PopupTriangle/PopupTriangle";
 import Close from "../Close/Close";
 import classes from "./EventForm.module.css";
 
@@ -123,6 +124,7 @@ const EventForm = ({
 
   return (
     <form className={formClasses} onSubmit={onSubmit}>
+      <PopupTriangle className="eventFormTriangle" />
       <Close onClick={onFormClose}>x</Close>
 
       {formContent}

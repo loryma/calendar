@@ -10,6 +10,7 @@ import textToTitle from "../../utilities/textToTitle";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import Close from "../Close/Close";
+import PopupTriangle from "../PopupTriangle/PopupTriangle";
 
 import classes from "./AddForm.module.css";
 
@@ -83,6 +84,7 @@ const AddForm = ({ createEvent, events, active, close }) => {
 
   return (
     <form className={addFormClasses} onSubmit={onSubmit}>
+      <PopupTriangle className="addEventTriangle" />
       <Close onClick={close}>x</Close>
       <div className={classes.inputWrapper}>
         <Input

@@ -28,3 +28,10 @@
   font-size: 8px;
   margin-bottom: 0.6em;
 }
+
+:global .addEventTriangle {
+  display: inline-block;
+  top: -6px;
+  left: 1.5em;
+  transform: rotate(-45deg);
+}
