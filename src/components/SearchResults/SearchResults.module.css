@@ -2,40 +2,44 @@
   display: none;
   position: absolute;
   top: 1.7em;
+  padding-top: 1em;
   left: 0;
-  background-color: white;
   width: 100%;
-  padding: 0.4em;
-  box-shadow: 2px 2px 5px #d9d9d9, -2px -2px 5px #d9d9d9;
   z-index: 2;
+}
+
+.container {
+  padding: 0.4em;
+  background-color: white;
+  box-shadow: 2px 2px 5px #d9d9d9, -2px -2px 5px #d9d9d9;
   max-height: 240px;
   overflow-y: scroll;
 }
 
-.searchResults::-webkit-scrollbar {
+.container::-webkit-scrollbar {
   width: 5px;
 }
 
-::scrollbar {
+.container::scrollbar {
   width: 8px;
 }
 
-.searchResults::-webkit-scrollbar-track {
+.container::-webkit-scrollbar-track {
   border-radius: 15px;
   background-color: #fff;
 }
 
-::scrollbar-track {
+.container::scrollbar-track {
   border-radius: 15px;
   background-color: #fff;
 }
 
-.searchResults::-webkit-scrollbar-thumb {
+.container::-webkit-scrollbar-thumb {
   background: #b9b7b7;
   border-radius: 10px;
 }
 
-::scrollbar-thumb {
+.container::scrollbar-thumb {
   background: #7a7a7a;
   border-radius: 10px;
   width: 5px;

@@ -10,6 +10,12 @@
   display: block;
 }
 
+.search:active :global(.disabledSearch),
+.search:hover :global(.disabledSearch),
+.search:focus :global(.disabledSearch) {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .search {
     width: 22%;

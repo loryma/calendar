@@ -14,6 +14,12 @@
   color: #b1b1b1;
 }
 
+.input:focus {
+  outline: none;
+  box-shadow: 2px 2px var(--focus-ring-color, #85c4f7) inset,
+    -2px -2px var(--focus-ring-color, #85c4f7) inset;
+}
+
 .invalid {
   border-color: red;
 }

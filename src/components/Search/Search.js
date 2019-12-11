@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
 import Input from "../Input/Input";
@@ -19,6 +19,14 @@ const Search = ({ setCurrentDate }) => {
     }
   }, [focusedEvent]);
 
+  const onFocus = () => {
+    setActive(true);
+  };
+
+  const onMouseOver = () => {
+    setActive(true);
+  };
+
   const onChange = e => {
     const { value } = e.target;
     setActive(true);
@@ -34,12 +42,16 @@ const Search = ({ setCurrentDate }) => {
       );
       setCurrentDate(new Date(+date));
       setActive(false);
-
       setFocusedEvent(+eventDate);
     }
   };
   return (
-    <div className={classes.search}>
+    <div
+      onFocus={onFocus}
+      onMouseOver={onMouseOver}
+      className={classes.search}
+      tab="0"
+    >
       <Input
         value={query}
         onChange={onChange}

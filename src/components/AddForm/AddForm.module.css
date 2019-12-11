@@ -22,3 +22,9 @@
   height: 1.7em;
   margin-bottom: 0.5em;
 }
+
+.error {
+  color: red;
+  font-size: 8px;
+  margin-bottom: 0.6em;
+}

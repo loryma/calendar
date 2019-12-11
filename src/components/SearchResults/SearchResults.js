@@ -9,7 +9,7 @@ const SearchResults = ({ active, query, results, onResultChoice }) => {
 
   const searchResultsClasses = [
     classes.searchResults,
-    // active ? classes.active : ""
+    active ? "" : "disabledSearch",
     "searchList"
   ].join(" ");
 
@@ -33,7 +33,9 @@ const SearchResults = ({ active, query, results, onResultChoice }) => {
   ));
   return (
     resultContent.length > 0 && (
-      <div className={searchResultsClasses}>{resultContent}</div>
+      <div className={searchResultsClasses}>
+        <div className={classes.container}>{resultContent}</div>
+      </div>
     )
   );
 };
