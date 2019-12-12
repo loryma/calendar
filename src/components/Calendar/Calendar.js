@@ -10,24 +10,16 @@ const Calendar = ({ current, events }) => {
     const next = new Date(current.getFullYear(), current.getMonth() + 1);
     const prev = new Date(current.getFullYear(), current.getMonth(), 0);
 
-    const firstDay = new Date(
-      current.getFullYear(),
-      current.getMonth()
-    ).getDay();
-    const currentDaysNumber = new Date(
-      current.getFullYear(),
-      current.getMonth() + 1,
-      0
-    ).getDate();
+    const firstDay = new Date(current.getFullYear(), current.getMonth()).getDay();
+    const currentDaysNumber = new Date(current.getFullYear(), current.getMonth() + 1, 0).getDate();
     const currentDays = [...new Array(currentDaysNumber)].map((_, i) => {
-      const dayStr = String(
-        +new Date(current.getFullYear(), current.getMonth(), i + 1)
-      );
+      const dayStr = String(+new Date(current.getFullYear(), current.getMonth(), i + 1));
       const event = events.find(event => event.dateMs === dayStr);
       return {
         id: dayStr,
         day: i + 1,
-        event
+        event,
+        disabled: false
       };
     });
     let firstWeek = [];
@@ -37,12 +29,11 @@ const Calendar = ({ current, events }) => {
       const prevMonthDate = prev.getDate();
       const prevLeftoverDays = prev.getDay();
       const prevFirstDate = prevMonthDate - prevLeftoverDays;
-      const firstWeekPrevMonth = [...new Array(prevLeftoverDays)].map(
-        (_, i) => prevFirstDate + i
-      );
+      const firstWeekPrevMonth = [...new Array(prevLeftoverDays)].map((_, i) => prevFirstDate + i);
       firstWeek = firstWeekPrevMonth.map(day => ({
         id: String(+new Date(prev.getFullYear(), prev.getMonth(), day)),
-        day
+        day,
+        disabled: true
       }));
     }
 
@@ -54,7 +45,8 @@ const Calendar = ({ current, events }) => {
 
     const nextDays = [...new Array(daysFromNexMonth)].map((_, i) => ({
       id: String(+new Date(next.getFullYear(), next.getMonth(), i + 1)),
-      day: i + 1
+      day: i + 1,
+      disabled: true
     }));
 
     days = [...days, ...nextDays];

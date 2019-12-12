@@ -1,6 +1,5 @@
 .input {
-  border: 1px solid #ebebeb;
-  box-shadow: 1px 2px 2px #d3d3d3 inset, -1px -1px 2px #d3d3d3 inset;
+  border: 1px solid var(--medium-grey, #84919b);
   padding-left: 0.5em;
   font-size: 12px;
   height: 100%;
@@ -16,8 +15,7 @@
 
 .input:focus {
   outline: none;
-  box-shadow: 2px 2px var(--focus-ring-color, #85c4f7) inset,
-    -2px -2px var(--focus-ring-color, #85c4f7) inset;
+  border-width: 2px;
 }
 
 .invalid {

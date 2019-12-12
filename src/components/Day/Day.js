@@ -3,7 +3,7 @@ import EventForm from "../EventForm/EventForm";
 import Background from "../Background/Background";
 import classes from "./Day.module.css";
 
-const Day = ({ id, date, weekDay, event, dayIndex, onOpen, isActive }) => {
+const Day = ({ id, disabled, date, weekDay, event, dayIndex, onOpen, isActive }) => {
   const [formActive, setFormActive] = useState(isActive);
 
   useEffect(() => {
@@ -30,16 +30,12 @@ const Day = ({ id, date, weekDay, event, dayIndex, onOpen, isActive }) => {
   const dayClasses = [
     classes.day,
     event ? classes.hasEvent : "",
-    formActive ? classes.active : ""
+    formActive ? classes.active : "",
+    disabled ? classes.disabled : ""
   ].join(" ");
 
   return (
-    <div
-      onClick={onFormOpen}
-      className={dayClasses}
-      tabIndex="0"
-      id={`event_${id}`}
-    >
+    <div onClick={onFormOpen} className={dayClasses} tabIndex="0" id={`event_${id}`}>
       {formActive && (
         <>
           <Background onClose={onFormClose} />

@@ -3,17 +3,9 @@ import Input from "../Input/Input";
 import classes from "./EventField.module.css";
 import EventTextarea from "../EventTextarea/EventTextarea";
 
-const EventField = ({ saved, name, onChange, field }) => {
-  const [viewMode, setViewMode] = useState(saved && field.value);
+const EventField = ({ saved, name, onChange, field, viewMode }) => {
   const InputType = name !== "description" ? Input : EventTextarea;
-  const rowClass =
-    name !== "description"
-      ? [
-          classes.row,
-          field.error ? classes.rowWithError : "",
-          saved ? classes.rowEdited : ""
-        ].join(" ")
-      : classes.rowTextarea;
+  const rowClass = name !== "description" ? classes.row : classes.rowTextarea;
 
   const formField = (
     <div className={rowClass} key={name}>
@@ -22,18 +14,11 @@ const EventField = ({ saved, name, onChange, field }) => {
     </div>
   );
 
-  const toggleMode = () => {
-    setViewMode(state => !state);
-  };
-
   const textRowClasses = [classes.textRow, classes[name]].join(" ");
 
   const text = (
     <div className={textRowClasses}>
       <p className={classes.text}>{field.value}</p>
-      <span className={classes.edit} onClick={toggleMode}>
-        Edit
-      </span>
     </div>
   );
 
@@ -45,10 +30,12 @@ const EventField = ({ saved, name, onChange, field }) => {
         return text;
       case "participants":
         return (
-          <>
-            <label className={classes.label}>Participants:</label>
-            {text}
-          </>
+          field.value && (
+            <>
+              <label className={classes.label}>Participants:</label>
+              {text}
+            </>
+          )
         );
       case "description":
         return text;
@@ -59,7 +46,7 @@ const EventField = ({ saved, name, onChange, field }) => {
 
   const textContent = getText();
 
-  return viewMode && field.value ? textContent : formField;
+  return viewMode ? textContent : formField;
 };
 
 export default EventField;

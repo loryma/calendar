@@ -48,6 +48,7 @@ const Month = ({ days }) => {
       event={day.event}
       onOpen={onOpen}
       isActive={day.id === activeDayId}
+      disabled={day.disabled}
     />
   ));
 

@@ -8,6 +8,7 @@ import EventField from "../EventField/EventField";
 import Button from "../Button/Button";
 import PopupTriangle from "../PopupTriangle/PopupTriangle";
 import Close from "../Close/Close";
+import Edit from "../Edit/Edit";
 import classes from "./EventForm.module.css";
 
 const EventForm = ({
@@ -36,13 +37,21 @@ const EventForm = ({
     }
   });
 
+  const [viewMode, setViewMode] = useState(!!id);
+
+  const [touched, setTouched] = useState(false);
+
   const SatSun = index % 7 === 5 || index === 5 || (index + 1) % 7 === 0;
 
-  const formClasses = [
-    classes.eventForm,
-    active ? classes.active : "",
-    SatSun ? classes.left : ""
-  ].join(" ");
+  const formClasses = [classes.eventForm, active ? classes.active : "", SatSun ? classes.left : ""].join(" ");
+
+  const toggleMode = () => {
+    setViewMode(state => !state);
+  };
+
+  const toggleTouched = () => {
+    setTouched(state => !state);
+  };
 
   const onSubmit = e => {
     e.preventDefault();
@@ -54,10 +63,7 @@ const EventForm = ({
       setForm(state => ({ ...state, [name]: { ...state[name], error } }));
     }
 
-    const hasErrors = fields.reduce(
-      (acc, [name, field]) => field.error || acc,
-      false
-    );
+    const hasErrors = fields.reduce((acc, [name, field]) => field.error || acc, false);
 
     if (hasErrors) {
       return;
@@ -108,7 +114,7 @@ const EventForm = ({
     let value = e.target.value;
     value = value.slice(0, 120);
     let error = validate(name, value);
-
+    toggleTouched();
     setForm(state => ({ ...state, [name]: { ...state[name], value, error } }));
   };
 
@@ -124,24 +130,32 @@ const EventForm = ({
       name={name}
       field={field}
       saved={!!id}
+      viewMode={viewMode}
     />
   ));
 
   return (
     <form className={formClasses} onSubmit={onSubmit}>
       <PopupTriangle className="eventFormTriangle" />
-      <Close onClick={onFormClose}>x</Close>
+      {id && <Edit onClick={toggleMode} />}
+      <Close onClick={onFormClose} />
 
       {formContent}
 
       <div className={classes.buttonRow}>
-        <div className={classes.buttonWrapper}>
-          <Button type="submit">Save</Button>
-        </div>
+        {!viewMode && (
+          <div className={classes.buttonWrapper}>
+            <Button disabled={!touched} type="submit">
+              Save
+            </Button>
+          </div>
+        )}
 
-        <Button type="button" onClick={onDelete}>
-          Delete
-        </Button>
+        {id && (
+          <Button type="button" onClick={onDelete}>
+            Delete
+          </Button>
+        )}
       </div>
     </form>
   );

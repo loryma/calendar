@@ -84,9 +84,11 @@ body {
 #root {
   min-height: 100vh;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  --dark: #232831;
   --blue: #189fff;
   --deep-blue: #006fca;
   --focus-background: #e5f1f9;
   --focus-ring-color: #85c4f7;
   --grey: #b9b9b9;
+  --medium-grey: #84919b;
 }

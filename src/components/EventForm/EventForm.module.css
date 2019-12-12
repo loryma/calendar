@@ -1,6 +1,7 @@
 .eventForm {
-  padding: 1.4em;
-  box-shadow: 3px 6px 5px #d9d9d9, -3px -2px 5px #d9d9d9;
+  padding: 2em 1.4em 1.4em;
+  /* box-shadow: 3px 6px 5px #d9d9d9, -3px -2px 5px #d9d9d9; */
+  background-color: #9599a0;
   display: none;
   background-color: white;
   position: fixed;
@@ -13,7 +14,7 @@
 
 .eventForm:focus,
 .eventForm:active {
-  box-shadow: 3px 6px 5px #d9d9d9, -3px -2px 5px #d9d9d9;
+  /* box-shadow: 3px 6px 5px #d9d9d9, -3px -2px 5px #d9d9d9; */
 }
 
 .active {

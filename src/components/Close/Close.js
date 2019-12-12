@@ -1,10 +1,11 @@
 import React from "react";
 import classes from "./Close.module.css";
+import svg from "./close.svg";
 
-const Close = ({ onClick, children }) => {
+const Close = ({ onClick }) => {
   return (
     <div className={classes.close} onClick={onClick}>
-      {children}
+      <img className={classes.icon} src={svg} alt="close" />
     </div>
   );
 };

@@ -17,10 +17,13 @@
 
 .day:focus,
 .day:active {
-  box-shadow: 2px 2px var(--focus-ring-color, #85c4f7) inset,
-    -2px -2px var(--focus-ring-color, #85c4f7) inset;
+  box-shadow: 2px 2px var(--focus-ring-color, #85c4f7) inset, -2px -2px var(--focus-ring-color, #85c4f7) inset;
   outline: none;
   background-color: var(--focus-background, #e5f1f9);
+}
+
+.day.disabled {
+  pointer-events: none;
 }
 
 .hasEvent {
@@ -36,6 +39,10 @@
   color: #b1b1b1;
 }
 
+.disabled .dayNumber {
+  color: #6868687c;
+}
+
 :global .shortDay {
   display: block;
 }
@@ -48,7 +55,7 @@
   font-size: 8px;
   padding: 0.4em 0;
   line-height: 1.2em;
-  color: #84919b;
+  color: var(--dark, #232831);
   overflow: hidden;
 }
 

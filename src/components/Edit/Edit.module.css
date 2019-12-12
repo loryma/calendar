@@ -1,0 +1,15 @@
+.edit {
+  width: 14px;
+  -webkit-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0.8rem;
+  right: 2rem;
+  line-height: 1.2em;
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.icon {
+  width: 100%;
+}

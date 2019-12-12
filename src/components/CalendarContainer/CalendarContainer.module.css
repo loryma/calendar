@@ -17,12 +17,11 @@
 }
 
 .header {
-  background-color: #f4f4f4;
+  background: var(--dark);
   padding-bottom: 1em;
   padding-top: 1em;
   height: 7em;
   width: 100%;
-  box-shadow: 0 2px 4px #b1b1b1;
 }
 
 .headerContainer {
