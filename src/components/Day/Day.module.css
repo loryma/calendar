@@ -27,7 +27,8 @@
 }
 
 .hasEvent {
-  background-color: #c1e3fe;
+  /* background: rgba(255, 255, 255, 0.9); */
+  background: linear-gradient(-235deg, #c1e3fe, var(--pastel, #c3c8ce));
 }
 
 .active {

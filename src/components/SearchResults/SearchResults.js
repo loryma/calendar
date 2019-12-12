@@ -6,21 +6,15 @@ import PopupTriangle from "../PopupTriangle/PopupTriangle";
 import classes from "./SearchResults.module.css";
 
 const SearchResults = ({ active, query, results, onResultChoice }) => {
-  const regEx = new RegExp(`\\b${query}`, "i");
-
-  const searchResultsClasses = [
-    classes.searchResults,
-    active ? "" : "disabledSearch",
-    "searchList"
-  ].join(" ");
+  const searchResultsClasses = [classes.searchResults, active ? "" : "disabledSearch", "searchList"].join(" ");
 
   const filteredEvents = query
     ? results.filter(
         event =>
-          regEx.test(event.title) ||
-          regEx.test(event.participants) ||
-          regEx.test(event.date) ||
-          regEx.test(event.description)
+          event.title.includes(query) ||
+          event.participants.includes(query) ||
+          event.date.includes(query) ||
+          event.description.includes(query)
       )
     : [];
 

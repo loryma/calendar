@@ -37,6 +37,8 @@ const EventForm = ({
     }
   });
 
+  const [isValid, setIsValid] = useState(false);
+
   const [viewMode, setViewMode] = useState(!!id);
 
   const [touched, setTouched] = useState(false);
@@ -49,21 +51,23 @@ const EventForm = ({
     setViewMode(state => !state);
   };
 
-  const toggleTouched = () => {
-    setTouched(state => !state);
+  const changeTouched = () => {
+    setTouched(true);
+  };
+
+  const changeIsValid = () => {
+    const fields = Object.entries(form);
+
+    const hasErrors = fields.reduce((acc, [name, field]) => field.error || acc, false);
+    setIsValid(!hasErrors);
+    debugger;
   };
 
   const onSubmit = e => {
     e.preventDefault();
     e.stopPropagation();
-    const fields = Object.entries(form);
 
-    for (let name in form) {
-      let error = validate(name, form[name].value);
-      setForm(state => ({ ...state, [name]: { ...state[name], error } }));
-    }
-
-    const hasErrors = fields.reduce((acc, [name, field]) => field.error || acc, false);
+    const hasErrors = checkFormValidity();
 
     if (hasErrors) {
       return;
@@ -110,12 +114,25 @@ const EventForm = ({
     return error;
   };
 
+  const checkFormValidity = () => {
+    const fields = Object.entries(form);
+
+    for (let name in form) {
+      let error = validate(name, form[name].value);
+      setForm(state => ({ ...state, [name]: { ...state[name], error } }));
+    }
+
+    const hasErrors = fields.reduce((acc, [name, field]) => field.error || acc, false);
+    return hasErrors;
+  };
+
   const onChange = (name, e) => {
     let value = e.target.value;
     value = value.slice(0, 120);
     let error = validate(name, value);
-    toggleTouched();
+
     setForm(state => ({ ...state, [name]: { ...state[name], value, error } }));
+    changeTouched();
   };
 
   const onFormClose = e => {

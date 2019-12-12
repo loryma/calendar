@@ -3,7 +3,7 @@
   z-index: 1;
   content: "";
   width: 12px;
-  border-top: 12px solid white;
+  border-top: 12px solid var(--pastel, #c3c8ce);
   border-left: 12px solid transparent;
   top: 1.5em;
   right: calc(100% - 7px);
