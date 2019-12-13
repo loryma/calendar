@@ -45,7 +45,9 @@ const EventForm = ({
 
   const SatSun = index % 7 === 5 || index === 5 || (index + 1) % 7 === 0;
 
-  const formClasses = [classes.eventForm, active ? classes.active : "", SatSun ? classes.left : ""].join(" ");
+  const formClasses = [classes.eventForm, "eventForm", active ? classes.active : "", SatSun ? classes.left : ""].join(
+    " "
+  );
 
   const toggleMode = () => {
     setViewMode(state => !state);
@@ -127,6 +129,7 @@ const EventForm = ({
   };
 
   const onChange = (name, e) => {
+    e.stopPropagation();
     let value = e.target.value;
     value = value.slice(0, 120);
     let error = validate(name, value);
@@ -151,8 +154,12 @@ const EventForm = ({
     />
   ));
 
+  const stop = e => {
+    e.stopPropagation();
+  };
+
   return (
-    <form className={formClasses} onSubmit={onSubmit}>
+    <form className={formClasses} onFocus={stop} onSubmit={onSubmit}>
       <PopupTriangle className="eventFormTriangle" />
       {id && <Edit onClick={toggleMode} />}
       <Close onClick={onFormClose} />

@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import EventForm from "../EventForm/EventForm";
 import Background from "../Background/Background";
 import classes from "./Day.module.css";
 
-const Day = ({ id, disabled, date, weekDay, event, dayIndex, onOpen, isActive }) => {
-  const [formActive, setFormActive] = useState(isActive);
-
-  useEffect(() => {
-    setFormActive(isActive);
-  }, [isActive]);
+const Day = ({ id, disabled, date, weekDay, event, dayIndex }) => {
+  const [formActive, setFormActive] = useState(false);
+  const ref = useRef(null);
 
   const onFormClose = () => {
     setFormActive(false);
@@ -16,7 +13,15 @@ const Day = ({ id, disabled, date, weekDay, event, dayIndex, onOpen, isActive })
 
   const onFormOpen = e => {
     setFormActive(true);
-    onOpen(id);
+  };
+
+  const onBlur = e => {
+    setTimeout(() => {
+      const focusedElement = document.activeElement;
+      if (!ref.current.contains(focusedElement)) {
+        setFormActive(false);
+      }
+    });
   };
 
   const eventContent = event && (
@@ -35,7 +40,7 @@ const Day = ({ id, disabled, date, weekDay, event, dayIndex, onOpen, isActive })
   ].join(" ");
 
   return (
-    <div onClick={onFormOpen} className={dayClasses} tabIndex="0" id={`event_${id}`}>
+    <div ref={ref} onBlur={onBlur} onClick={onFormOpen} className={dayClasses} tabIndex="0" id={`event_${id}`}>
       {formActive && (
         <>
           <Background onClose={onFormClose} />

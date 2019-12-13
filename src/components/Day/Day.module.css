@@ -16,11 +16,24 @@
 }
 
 .day:focus,
-.day:active {
+.day:active,
+.day:focus-within {
   box-shadow: 2px 2px var(--focus-ring-color, #85c4f7) inset, -2px -2px var(--focus-ring-color, #85c4f7) inset;
   outline: none;
   background-color: var(--focus-background, #e5f1f9);
 }
+
+.active {
+  overflow: visible;
+}
+
+/* .day:focus :global(.formEvent),
+.day:active :global(.formEvent) {
+  display: block;
+}
+
+.active :global(.formEvent) {
+} */
 
 .day.disabled {
   pointer-events: none;
@@ -28,11 +41,7 @@
 
 .hasEvent {
   /* background: rgba(255, 255, 255, 0.9); */
-  background: linear-gradient(-235deg, #c1e3fe, var(--pastel, #c3c8ce));
-}
-
-.active {
-  overflow: visible;
+  background: linear-gradient(135deg, #479ee6, var(--deep-blue));
 }
 
 .dayNumber {
