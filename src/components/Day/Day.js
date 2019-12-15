@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import EventForm from "../EventForm/EventForm";
 import Background from "../Background/Background";
 import Event from "../Event/Event";

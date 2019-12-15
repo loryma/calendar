@@ -15,7 +15,7 @@ const Calendar = ({ current, events }) => {
     const currentDays = [...new Array(currentDaysNumber)].map((_, i) => {
       const dateObj = new Date(current.getFullYear(), current.getMonth(), i + 1);
       const dayStr = String(+dateObj);
-      const weekDay = dateObj.getDate();
+      const weekDay = dateObj.getDay();
       const eventsArr = events.filter(event => event.dateMs === dayStr);
       return {
         id: dayStr,
