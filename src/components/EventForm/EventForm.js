@@ -62,7 +62,6 @@ const EventForm = ({
 
     const hasErrors = fields.reduce((acc, [name, field]) => field.error || acc, false);
     setIsValid(!hasErrors);
-    debugger;
   };
 
   const onSubmit = e => {
@@ -154,12 +153,8 @@ const EventForm = ({
     />
   ));
 
-  const stop = e => {
-    e.stopPropagation();
-  };
-
   return (
-    <form className={formClasses} onFocus={stop} onSubmit={onSubmit}>
+    <form className={formClasses} onSubmit={onSubmit}>
       <PopupTriangle className="eventFormTriangle" />
       {id && <Edit onClick={toggleMode} />}
       <Close onClick={onFormClose} />

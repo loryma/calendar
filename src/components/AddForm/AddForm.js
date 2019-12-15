@@ -1,108 +1,152 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions";
-import validateShortDate from "../../utilities/validateShortDate";
-import textToShortDate from "../../utilities/textToShortDate";
 import dateToText from "../../utilities/dateToText";
-import textToTitle from "../../utilities/textToTitle";
-
-import Input from "../Input/Input";
+import textToDate from "../../utilities/textToDate";
+import validateDate from "../../utilities/validateDate";
+import EventField from "../EventField/EventField";
 import Button from "../Button/Button";
 import Close from "../Close/Close";
-import PopupTriangle from "../PopupTriangle/PopupTriangle";
-
 import classes from "./AddForm.module.css";
 
-const AddForm = ({ createEvent, events, active, close }) => {
-  const [value, setValue] = useState("");
-  const [error, setError] = useState(false);
+const EventForm = ({ id, createEvent, active, onClose, title = "", date, participants = "", description = "" }) => {
+  const [form, setForm] = useState({
+    title: { value: title, placeholder: "Event", error: null },
+    date: { value: date, placeholder: "", error: null },
+    participants: {
+      value: participants,
+      placeholder: "Participants"
+    },
+    description: {
+      value: description,
+      placeholder: "Description"
+    }
+  });
+
+  const [isValid, setIsValid] = useState(false);
+
   const [touched, setTouched] = useState(false);
 
-  const onChange = e => {
-    const { value } = e.target;
-    setValue(value);
+  const formClasses = [classes.eventForm, "eventForm", active ? classes.active : ""].join(" ");
 
-    touched && validate(value);
+  const changeTouched = () => {
+    setTouched(true);
   };
 
-  const validate = value => {
-    let error = false;
+  const changeIsValid = () => {
+    const fields = Object.entries(form);
 
-    error = validateShortDate(value);
-
-    if (!error) {
-      const title = textToTitle(value);
-      if (!title.trim()) {
-        error = "Title is requered";
-        setError(error);
-      }
-      const dateMs = textToShortDate(value);
-      const exist = events.find(el => el.dateMs === dateMs);
-
-      if (exist) {
-        error = "Event for the this date already exist";
-      }
-    }
-
-    if (error) {
-      setError(error);
-    } else {
-      setError(false);
-    }
-    return error;
+    const hasErrors = fields.reduce((acc, [name, field]) => field.error || acc, false);
+    setIsValid(!hasErrors);
   };
 
   const onSubmit = e => {
     e.preventDefault();
-    setTouched(true);
-    const error = validate(value);
-    if (error) {
+    e.stopPropagation();
+
+    const hasErrors = checkFormValidity();
+
+    if (hasErrors) {
       return;
     }
 
-    const dateMs = textToShortDate(value);
-    if (dateMs) {
-      const dateObj = new Date(+dateMs);
-      const date = dateToText(dateObj);
-      const title = textToTitle(value);
+    if (form.title.value.trim()) {
       createEvent({
-        title,
-        date,
-        dateMs,
-        participants: "",
-        description: ""
+        title: form.title.value,
+        date: form.date.value,
+        dateMs: textToDate(form.date.value),
+        participants: form.participants.value,
+        description: form.description.value
       });
-      setValue("");
-      close();
+
+      onClose();
     }
   };
 
-  const addFormClasses = [classes.addForm, active ? classes.active : ""].join(
-    " "
-  );
+  const validate = (name, value) => {
+    let error = false;
+    if (name === "date") {
+      error = validateDate(value);
+    }
+    if (name === "title" && !value.trim()) {
+      error = "Event name is required";
+    }
+
+    return error;
+  };
+
+  const checkFormValidity = () => {
+    const fields = Object.entries(form);
+
+    for (let name in form) {
+      let error = validate(name, form[name].value);
+      setForm(state => ({ ...state, [name]: { ...state[name], error } }));
+    }
+
+    const hasErrors = fields.reduce((acc, [name, field]) => field.error || acc, false);
+    return hasErrors;
+  };
+
+  const onChange = (name, e) => {
+    e.stopPropagation();
+    let value = e.target.value;
+    value = value.slice(0, 120);
+    let error = validate(name, value);
+
+    setForm(state => ({ ...state, [name]: { ...state[name], value, error } }));
+    changeTouched();
+  };
+
+  const onFormClose = e => {
+    e.stopPropagation();
+    onClose();
+  };
+
+  const formContent = Object.entries(form).map(([name, field]) => (
+    <EventField
+      key={name}
+      onChange={onChange.bind(this, name)}
+      name={name}
+      field={field}
+      saved={!!id}
+      viewMode={false}
+    />
+  ));
 
   return (
-    <form className={addFormClasses} onSubmit={onSubmit}>
-      <PopupTriangle className="addEventTriangle" />
-      <Close onClick={close}>x</Close>
-      <div className={classes.inputWrapper}>
-        <Input
-          value={value}
-          onChange={onChange}
-          placeholder="December 11, 20:00, birthday"
-          error={error}
-        />
+    <form className={formClasses} onSubmit={onSubmit}>
+      <Close onClick={onFormClose} />
+
+      {formContent}
+
+      <div className={classes.buttonRow}>
+        <div className={classes.buttonWrapper}>
+          <Button disabled={!touched} type="submit">
+            Save
+          </Button>
+        </div>
       </div>
-      {error && touched && <div className={classes.error}>{error}</div>}
-      <Button type="submit">Create</Button>
     </form>
   );
 };
 
-const mapStateToProps = state => ({ events: state.events });
+const mapStateToProps = (state, { eventId, dateMs }) => {
+  let event;
 
-const mapDispatchToPtops = dispatch => ({
-  createEvent: event => dispatch(actions.createEvent(event))
+  if (eventId) {
+    event = state.events.find(event => event.id === eventId);
+    if (event) {
+      return { ...event };
+    }
+  }
+  event = { date: dateToText(dateMs), dateMs };
+  return event;
+};
+
+const mapDispatchToProps = dispatch => ({
+  createEvent: event => dispatch(actions.createEvent(event)),
+  updateEvent: event => dispatch(actions.updateEvent(event)),
+  deleteEvent: id => dispatch(actions.deleteEvent(id))
 });
-export default connect(mapStateToProps, mapDispatchToPtops)(AddForm);
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventForm);

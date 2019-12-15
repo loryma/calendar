@@ -1,15 +1,17 @@
 .eventForm {
-  padding: 2em 1.4em 1.4em;
+  padding: 3em 1.4em 1.4em;
   /* box-shadow: 3px 6px 5px #d9d9d9, -3px -2px 5px #d9d9d9; */
   /* background-color: #9599a0; */
   display: none;
   background-color: whitesmoke;
   position: fixed;
   width: 80vw;
+  min-height: 330px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: initial;
+  border-radius: 0.3em;
 }
 
 .eventForm:focus,

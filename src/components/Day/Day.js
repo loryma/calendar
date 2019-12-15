@@ -1,63 +1,111 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import EventForm from "../EventForm/EventForm";
 import Background from "../Background/Background";
+import Event from "../Event/Event";
+import DayView from "../DayView/DayView";
 import classes from "./Day.module.css";
 
-const Day = ({ id, disabled, date, weekDay, event, dayIndex }) => {
+const VISIBLE_EVENTS = 3;
+
+const Day = ({ id, disabled, date, weekDay, events = [], dayIndex, today }) => {
   const [formActive, setFormActive] = useState(false);
+  const [currentEvent, setCurrentEvent] = useState(null);
+  const [isViewOpened, setIsViewOpened] = useState(false);
   const ref = useRef(null);
 
   const onFormClose = () => {
     setFormActive(false);
+    setCurrentEvent(null);
   };
 
   const onFormOpen = e => {
     setFormActive(true);
+    setCurrentEvent(null);
   };
 
   const onBlur = e => {
     setTimeout(() => {
       const focusedElement = document.activeElement;
-      if (!ref.current.contains(focusedElement)) {
+      if (ref.current && !ref.current.contains(focusedElement)) {
         setFormActive(false);
+        setCurrentEvent(null);
       }
     });
   };
 
-  const eventContent = event && (
-    <div className={classes.event}>
-      <h3 className={classes.eventTitle}>{event.title}</h3>
-      <p className={classes.eventParticipants}>{event.participants}</p>
-      <p className={classes.eventDescription}>{event.description}</p>
-    </div>
-  );
+  const onEventChoice = id => {
+    setCurrentEvent(id);
+    setFormActive(state => false);
+    setTimeout(() => {
+      setFormActive(state => true);
+    });
+  };
+
+  const openView = () => {
+    setFormActive(false);
+    setIsViewOpened(true);
+  };
+  const closeView = () => {
+    setIsViewOpened(false);
+  };
+
+  const eventContent =
+    events.length > 0 &&
+    events.slice(0, 3).map(event => (
+      <div key={event.id} className={classes.event}>
+        <Event title={event.title} onClick={onEventChoice.bind(this, event.id)} />
+      </div>
+    ));
 
   const dayClasses = [
     classes.day,
-    event ? classes.hasEvent : "",
+    events.length > 0 ? classes.hasEvent : "",
     formActive ? classes.active : "",
-    disabled ? classes.disabled : ""
+    isViewOpened ? classes.viewOpened : "",
+    disabled ? classes.disabled : "",
+    today ? classes.today : ""
   ].join(" ");
 
   return (
-    <div ref={ref} onBlur={onBlur} onClick={onFormOpen} className={dayClasses} tabIndex="0" id={`event_${id}`}>
+    <div ref={ref} onBlur={onBlur} className={dayClasses} tabIndex="0" id={`event_${id}`}>
       {formActive && (
         <>
-          <Background onClose={onFormClose} />
-          <EventForm
-            eventId={event && event.id}
-            dateMs={id}
-            active={formActive}
-            onClose={onFormClose}
-            index={dayIndex}
+          <Background onClose={onFormClose} hideOnDesktop />
+          <EventForm eventId={currentEvent} dateMs={id} active={formActive} onClose={onFormClose} index={dayIndex} />
+        </>
+      )}
+      <p className={classes.dayNumber}>{date}</p>
+      {eventContent}
+      {events.length > VISIBLE_EVENTS && (
+        <button className={classes.more} onClick={openView} type="button">
+          {events.length - VISIBLE_EVENTS} more
+        </button>
+      )}
+
+      {events.length > 0 && (
+        <button className={classes.count} onClick={openView} type="button">
+          {events.length} events
+        </button>
+      )}
+
+      {events.length > 0 && isViewOpened && (
+        <>
+          <Background onClose={closeView} />
+          <DayView
+            onClose={closeView}
+            id={id}
+            key={id}
+            date={date}
+            weekDay={weekDay}
+            dayIndex={dayIndex}
+            events={events}
           />
         </>
       )}
-      <p className={classes.dayNumber}>
-        {weekDay}
-        {date}
-      </p>
-      {eventContent}
+
+      <div className={classes.add} onClick={onFormOpen} type="button">
+        +
+      </div>
     </div>
   );
 };

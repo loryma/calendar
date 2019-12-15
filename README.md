@@ -8,11 +8,11 @@ Deployed at https://calendar-react-app.netlify.com/
 
 **functionality**
 
-- enter events by clicking on calendar cell
+- enter events by clicking on plus button: bottom right on mobile or bottom right in the day cell
 - edit event data in event form
 - delete event from event form
-- another way to enter event is to click create event button and enter month and day and year optionally (current year by default)
-- calendar validates entered day by checking if day exits and if any event already assigned to the date
+- open events in a popup when there are two many to see in day cell or on mobile
+- calendar validates entered day by checking if day exits
 - search for events in the search input
 
 **implementation**

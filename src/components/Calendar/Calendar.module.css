@@ -4,5 +4,5 @@
   left: 0;
   height: 100%;
   width: 100%;
-  box-shadow: 0 -1px #ebebeb;
+  border-top: 1px solid #9b9b9b;
 }

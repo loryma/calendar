@@ -4,6 +4,7 @@ import Calendar from "../Calendar/Calendar";
 import Search from "../Search/Search";
 import AddEvent from "../AddEvent/AddEvent";
 import Today from "../Today/Today";
+import Weekday from "../Weekday/Weekday";
 
 import classes from "./CalendarContainer.module.css";
 
@@ -12,15 +13,19 @@ const CalendarContainer = () => {
     <>
       <div className={classes.header}>
         <div className={classes.headerContainer}>
-          <AddEvent />
+          <div className={classes.navigation}>
+            <Navigation />
+            <Today />
+          </div>
           <Search />
         </div>
       </div>
       <div className={classes.calendarContainer}>
-        <div className={classes.navigation}>
-          <Navigation />
-          <Today />
+        <Weekday />
+        <div className={classes.addEvent}>
+          <AddEvent />
         </div>
+
         <div className={classes.calendar}>
           <Calendar />
         </div>

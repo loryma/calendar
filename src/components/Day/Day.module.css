@@ -1,8 +1,9 @@
 .day {
   width: 100%;
   height: 100%;
-  padding: 0.5em;
-  box-shadow: 1px 1px #ebebeb;
+  padding: 0.2em;
+  border-right: 1px solid #9b9b9b;
+  border-bottom: 1px solid #9b9b9b;
   position: relative;
   /* to prevent grid cell from expanding */
   min-height: 0;
@@ -12,7 +13,11 @@
 }
 
 .day:nth-child(7n + 1) {
-  box-shadow: 1px 1px #ebebeb, -1px 0 #ebebeb;
+  border-left: 1px solid #9b9b9b;
+}
+
+.day:hover {
+  box-shadow: 2px 2px #ebebeb inset, -2px -2px #ebebeb inset;
 }
 
 .day:focus,
@@ -20,10 +25,27 @@
 .day:focus-within {
   box-shadow: 2px 2px var(--focus-ring-color, #85c4f7) inset, -2px -2px var(--focus-ring-color, #85c4f7) inset;
   outline: none;
-  background-color: var(--focus-background, #e5f1f9);
+}
+
+.today {
+  background: linear-gradient(#6868687c, black);
+}
+
+.today .dayNumber {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.today:focus,
+.today:active {
+  outline: blanchedalmond;
 }
 
 .active {
+  overflow: visible;
+}
+
+.viewOpened {
   overflow: visible;
 }
 
@@ -41,7 +63,7 @@
 
 .hasEvent {
   /* background: rgba(255, 255, 255, 0.9); */
-  background: linear-gradient(135deg, #479ee6, var(--deep-blue));
+  background: var(--deep-blue);
 }
 
 .dayNumber {
@@ -53,48 +75,90 @@
   color: #6868687c;
 }
 
-:global .shortDay {
-  display: block;
-}
-
-:global .longDay {
+.event {
   display: none;
 }
 
-.event {
-  font-size: 8px;
-  padding: 0.4em 0;
-  line-height: 1.2em;
-  color: var(--dark, #232831);
-  overflow: hidden;
+.add {
+  display: none;
+}
+.more {
+  display: none;
 }
 
-.eventTitle {
-  font-weight: bold;
-  padding-bottom: 0.4em;
-}
-.eventParticipants {
-  padding-bottom: 0.4em;
-}
-.eventDescription {
-  line-height: 1em;
-  padding-top: 0.2em;
-  overflow: hidden;
+.count {
+  display: block;
+  background-color: transparent;
+  border: none;
+  font-size: 10px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding: 0;
 }
 
+.count:focus,
+.count:active {
+  outline: none;
+}
 @media (min-width: 768px) {
-  .event {
-    font-size: 12px;
+  .day {
+    padding: 0.5em;
   }
 
   .dayNumber {
     font-size: 12px;
   }
-  :global .shortDay {
-    display: none;
+
+  .day:hover .add {
+    display: inline-block;
   }
 
-  :global .longDay {
-    display: inline-block;
+  .add:focus,
+  .add:active {
+    outline: none;
+  }
+  .event {
+    display: block;
+    overflow: hidden;
+    margin-top: 0.5em;
+  }
+
+  .add {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: transparent;
+    border: none;
+    color: var(--focus-ring-color, #85c4f7);
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1em;
+    font-size: 2em;
+    padding: 0.2em;
+  }
+
+  .add:hover {
+    color: white;
+  }
+
+  .more {
+    display: block;
+    background-color: transparent;
+    border: none;
+    font-size: 12px;
+    color: white;
+    padding: 0;
+    margin-top: 1em;
+    cursor: pointer;
+  }
+
+  .more:hover {
+    color: var(--focus-ring-color, #85c4f7);
+  }
+
+  .count {
+    display: none;
   }
 }

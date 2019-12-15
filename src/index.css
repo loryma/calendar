@@ -82,6 +82,7 @@ body {
   min-height: 100vh;
 }
 #root {
+  background-color: black;
   min-height: 100vh;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   --dark: #232831;

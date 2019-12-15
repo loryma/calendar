@@ -1,0 +1,23 @@
+.event {
+  background-color: white;
+  border-radius: 5px;
+  padding: 0.3em;
+  color: var(--dark, #232831);
+}
+.event:hover,
+.event:active {
+  background-color: var(--focus-ring-color, #85c4f7);
+  color: white;
+}
+
+.title {
+  font-size: 12px;
+  white-space: nowrap;
+  line-height: 1em;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 12px;
+  }
+}

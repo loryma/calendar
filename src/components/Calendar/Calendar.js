@@ -13,12 +13,15 @@ const Calendar = ({ current, events }) => {
     const firstDay = new Date(current.getFullYear(), current.getMonth()).getDay();
     const currentDaysNumber = new Date(current.getFullYear(), current.getMonth() + 1, 0).getDate();
     const currentDays = [...new Array(currentDaysNumber)].map((_, i) => {
-      const dayStr = String(+new Date(current.getFullYear(), current.getMonth(), i + 1));
-      const event = events.find(event => event.dateMs === dayStr);
+      const dateObj = new Date(current.getFullYear(), current.getMonth(), i + 1);
+      const dayStr = String(+dateObj);
+      const weekDay = dateObj.getDate();
+      const eventsArr = events.filter(event => event.dateMs === dayStr);
       return {
         id: dayStr,
         day: i + 1,
-        event,
+        weekDay,
+        events: eventsArr,
         disabled: false
       };
     });

@@ -1,0 +1,77 @@
+.dayView {
+  width: 60vw;
+  height: initial;
+  min-height: 150%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.8em 0.6em 1em 0.6em;
+  border: 1px solid #6868687c;
+  background-color: #575759;
+  border-radius: 0.3em;
+  position: fixed;
+  /* to prevent grid cell from expanding */
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* .day:focus,
+  .day:active,
+  .day:focus-within {
+    box-shadow: 2px 2px var(--focus-ring-color, #85c4f7) inset, -2px -2px var(--focus-ring-color, #85c4f7) inset;
+    outline: none;
+    background-color: var(--focus-background, #e5f1f9);
+  } */
+
+.active {
+  overflow: visible;
+}
+
+.dayNumber {
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+.disabled .dayNumber {
+  color: #6868687c;
+}
+
+.event {
+  overflow: hidden;
+  margin-top: 0.5em;
+}
+
+:global .shortDay {
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+}
+
+:global .longDay {
+  font-weight: bold;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .dayView {
+    width: 150%;
+    position: absolute;
+  }
+
+  .dayNumber {
+  }
+
+  :global .shortDay {
+    display: none;
+  }
+
+  :global .longDay {
+    display: block;
+  }
+}
